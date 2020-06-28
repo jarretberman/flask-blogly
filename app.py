@@ -2,7 +2,7 @@
 
 from flask import Flask, redirect, session,  render_template, request, flash
 from models import db, connect_db, User
-from flask_debugtoolbar import d
+from flask_debugtoolbar import DebugToolbarExtension
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly'
@@ -10,7 +10,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
 connect_db(app)
-db.create_all()
 
 app.config['SECRET_KEY'] = "SECRET!"
 debug = DebugToolbarExtension(app)
@@ -44,14 +43,14 @@ def newUserPost():
     last = request.form['last']
     img = request.form['img'] if request.form['img'] else None
 
-    user = User(first_name=first,last_name=last,img_url=img)
+    user = User(first_name=first,last_name=last,image_url=img)
     db.session.add(user)
     db.session.commit()
 
     return redirect('/users')
 
 @app.route('/users/<int:id>')
-def userProfile():
+def userProfile(id):
     """Displays User Profile"""
 
     user = User.query.get_or_404(id)
@@ -61,18 +60,18 @@ def userProfile():
 @app.route('/users/<int:id>/edit')
 def userEdit(id):
     """Edit a user profile"""
-
-    return render_template('edit.html')
+    user = User.query.get(id)
+    return render_template('edit.html', user=user)
 
 @app.route('/users/<int:id>/edit',  methods=["POST"])
 def updateUser(id):
     """Processes Edit form"""
 
     user = User.query.get(id)
-    form = dict(request.form)
-
-    for (key,val) in form:
-        user.key = val
+   
+    user.first_name =request.form['first']
+    user.last_name =request.form['last']
+    user.image_url =request.form['img']
 
     db.session.add(user)
     db.session.commit()
@@ -83,6 +82,7 @@ def updateUser(id):
 def deleteUser(id):
     """Deletes a User"""
 
-    User.query.get(id).delete()
+    User.query.filter_by(id=id).delete()
+    db.session.commit()
 
     return redirect('/users')

@@ -1,0 +1,10 @@
+{%extends 'base.html'%}
+{%block content%}
+<form action="/users/{{user.id}}/edit" method="post">
+    <label>First Name:</label><input type="text" name="first" id="" value="{{user.first_name}}">
+    <label>Last Name:</label><input type="text" name="last" id="" value="{{user.last_name}}">
+    <label>Profile Image URL:</label><input type="text" name="img" id="" value="{{user.image_url}}">
+    <input type="submit" value="Submit Changes">
+</form>
+<a href='/users/{{user.id}}'>Go Back</a>
+{%endblock%}

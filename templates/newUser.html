@@ -1,0 +1,11 @@
+{%extends 'base.html'%}
+{%block content%}
+<form action="/users/new" method="post">
+    <label>First Name:</label><input type="text" name="first" id="" >
+    <label>Last Name:</label><input type="text" name="last" id="" >
+    <label>Profile Image URL:</label><input type="text" name="img" id="" >
+    <input type="submit" value="Creat Profile">
+</form>
+<br><br>
+<a href='/users'>Go Back</a>
+{%endblock%}

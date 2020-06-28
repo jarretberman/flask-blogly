@@ -1,0 +1,10 @@
+{%extends 'base.html'%}
+{%block content%}
+<h1>{{user.full_name().capitalize()}}</h1>
+<img src="{{user.image_url}}" style ="height:150px">
+<br><br>
+<a href='/users/{{user.id}}/edit'>Edit Profile</a>
+<form action="/users/{{user.id}}/delete" method="post">
+    <input type="submit" value="Delete Profile">
+</form>
+{%endblock%}
