@@ -1,0 +1,13 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<h3>{{tag.name}}</h3>
+<p>{{tag.description}}</p>
+<br>
+<br>
+{%for post in tag.posts%}
+<p>{{post.title}} <small>{{post.users.full_name()}}</small></p>
+{%endfor%}
+<br>
+<a href="/tags">Go Back</a>
+{%endblock%}

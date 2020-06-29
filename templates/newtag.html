@@ -1,0 +1,11 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<form action="/tags/new" method="post">
+    <label for="name">Tag name</label><input type="text" name="name" id="name" >
+    <label for="desc">Description</label><input type="text" name="desc" id="desc" >
+    <input type="submit" value="Submit">
+</form>
+
+<a href="/tags">Go Back</a>
+{%endblock%}

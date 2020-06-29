@@ -1,0 +1,12 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<form action="/tags/edit/{{tag.id}}" method="post">
+    <input type="text" name="name" id="name" value="{{tag.name}}">
+    <input type="text" name="desc" id="desc" value="{{tag.description}}">
+    <input type="submit" value="Submit">
+</form>
+
+<a href="/tags">Go Back</a>
+
+{%endblock%}

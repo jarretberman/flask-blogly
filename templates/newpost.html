@@ -1,0 +1,14 @@
+{%extends 'base.html'%}
+{%block content%}
+    <form action="/users/{{userid}}/posts/new" method="post">
+    <label for="title">Title :</label><input type="text" name="title" id="title">
+    <label for="post">Content:</label><input type ="text" name="post" id="post" cols="30" rows="10">
+    <br>
+    {%for tag in tags%}
+    <input type="checkbox" name="{{tag.name}}" id=""><label>{{tag.name}}</label><br>
+    {%endfor%}
+    <input type="submit" value="Submit">
+    </form>
+    <br>
+    <a href="/users/{{userid}}">Go Back</a>
+{%endblock%}
